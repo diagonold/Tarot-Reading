@@ -1,0 +1,40 @@
+Setting up 
+    we will follow the webpack and babel guide for this
+
+    webpack is an asset bundler
+
+    babel 
+
+    steps:
+        npm init
+
+        npm install webpack --save-dev
+
+        npm install --save-dev @babel/core @babel/preset-env babel-loader npm install --save core-js@3 regenerator-runtime
+
+        create the entry in webpack.config.js
+             entry: ['./src/js/index.js']
+
+        create the entry to .babelrc to this
+            {
+                "presets": [
+                    ["@babel/env", {
+                        "useBuiltIns": "usage",
+                        "corejs": "3",
+                        "targets": {
+                            "browsers": [
+                                "last 5 versions",
+                                "ie >= 8"
+                            ]
+                        }
+                    }]
+                ]
+            }
+        
+        Install the webpack cli
+
+        npm install webpack-dev-server --save-dev
+        install webpack developement server, allow us to see changes to our code whenever we change a file
+
+    
+
