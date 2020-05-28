@@ -1,11 +1,15 @@
-Setting up 
+# Setting up  
+
+    follow the javascript course setup for this
+
     we will follow the webpack and babel guide for this
 
     webpack is an asset bundler
 
-    babel 
+    babel
 
-    steps:
+## steps:
+
         npm init
 
         npm install webpack --save-dev
@@ -36,5 +40,23 @@ Setting up
         npm install webpack-dev-server --save-dev
         install webpack developement server, allow us to see changes to our code whenever we change a file
 
-    
+        configure package.json scripts and add dev, start and build
+
+        npm run start 
+
+
+
+# Building the HTML and CSS
+
+Learning bootstrap. then build on top of it. Bootstrap very useful for getting grids
+
+
+# TODO once app is built
+
+1. web hosting
+    - simple hosting service, pick something that is not too expensive
+    - possible hoster is bluehost
+2. Domain name
+    - choose a website identifier
+    - once you have a server and domain name, you connect the two together
 

@@ -1,3 +1,3 @@
-# An app for tarot reading
+# Tarot Reading 
 
 Written in plain javascript
