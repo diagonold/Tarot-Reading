@@ -1,8 +1,14 @@
+.background{
+    background-color: #f1e3dd ;
+}
+
 .topText{
-    padding: 50px;
+    padding: 10px;
 }
 
 .topPanel{
+    margin: 10px 10px 10px 10px;
+    border: 10px solid #e0c8bd;
     text-align:center;
     color :#667292;
     background-color: #f1e3dd ;
@@ -18,10 +24,12 @@
 
 .landingPanel{
     color:#667292;
-    background-color: #8d9db6;
-    column-fill:auto;
-    border: thick solid #f1e3dd ;
-    height: 300px;           
+    background-color: #bccad6;
+    border: 50px solid #f1e3dd ;
+    height: 400px; 
+    padding-top: 150px;  
+    text-align: center;  
+    
 }
 
 .cardPanel{
@@ -41,11 +49,15 @@
 .resultCardPanel{
     margin-top: 50px;
     margin-bottom: 50px;
-    border:  5px solid #667292;
+    border:  4px solid #667292;
     border-radius: 5px;
     height: 400px;
 }
 
+.resultTextPanel{
+    border: 5px solid #c5aea4;
+    height:300px;
+}
 .resultText{
     padding: 10px;
     text-align: center;

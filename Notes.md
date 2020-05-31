@@ -50,6 +50,36 @@
 
 Learning bootstrap. then build on top of it. Bootstrap very useful for getting grids
 
+# Learning more about the tarot arcana
+- from tarot.com 
+- from https://askastrology.com/wp-content/uploads/2019/01/tarot-ebook.pdf 
+- We have learnt a bit from both. Enough to give summary of the meaning but not enough to give an in depth reading of a person. That requires experience.
+
+# Time to start the Javascript part
+
+
+
+## Model-View-Controller
+
+1. Model
+    - the brain of the app
+    - responsible for getting memory and manipulating data
+    - it can also interact with the database
+
+2. View
+    - Handles the actual view of the application
+    - renders the view
+    - interacts with the html and css of the app
+
+3. Controller
+    - controller takes  in the user input
+    - This could be in the form of user input or click
+    - the controller also acts like a middleman between the model and the view.
+
+
+## Bugs
+1. after every change of reading, the card does not close
+    
 
 # TODO once app is built
 
