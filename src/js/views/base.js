@@ -3,5 +3,7 @@ export const elements = {
     titlePage: document.getElementById("title__page"),
     singleSpread: document.querySelector(".single__reading"),
     tripleSpread: document.querySelector(".triple__reading"),
-    cardList:document.querySelector(".card__list")
+    cardPanel:document.getElementById("card__panel"),
+    mainPanel:document.getElementById("main__panel")
 }
+

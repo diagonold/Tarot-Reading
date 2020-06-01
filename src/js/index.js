@@ -9,13 +9,18 @@ var state = {
     // stage 0 is single spread
     // stage 1 is triple spread
     // stage -1 is landing page
+    // stage 2 is result page
     chooseNumCards: -1,
+
+    // cardData is an array of object
+    // this object is the data of each card
 
 
 };
 
 // We need this in the initial
 state.cards = new Card();
+state.cardShown = false;
 
 
 /*States of the application 
@@ -69,6 +74,8 @@ elements.tripleSpread.addEventListener("click", event =>{
     // change the title 
     Mode.renderStage(state.stage);
 
+    // choosing card stage
+
 });
 
 const init = () => {
@@ -77,6 +84,15 @@ const init = () => {
     state.chosenCardPositions = [];
     state.chosenCardValues =  [];
 
+    // render cards and listeners
+    if(!state.cardShown){
+        cardView.showCards();
+        state.cardShown = true;
+        
+        // added here so that only one listener is created
+        createCardEventListeners(state.cardShown);
+    }
+    
     // close all cards
     cardView.closeAllCardPanel();
     
@@ -89,41 +105,71 @@ const init = () => {
 
 /*************** Card controller*********/
 
+var createCardEventListeners = (cardShown) => {
+    if(cardShown){
+        // create event listeners
+        listenCardEvents();
+    }
+}
 
-// Depends on the game spread, we limit the number of cards to be chosen
-
-// Checks each card if it is clicked
-state.cards.cardRange.forEach( val => {
-    document.getElementById(`card__${val}`).addEventListener('click', event => {
-
-        
-        // only allow card choosing if does not exceed choosecards
-        if( state.chosenCardPositions.length < state.chooseNumCards){
-
-            // add the val to cards chosen
-            // this seems redundant
-            state.chosenCardPositions.push(val);
-
-            // assign card values based on cardPosition
-            var cardValue = state.cards.cardValues[val];
-            state.chosenCardValues.push(cardValue);
-
-            // change view of that card
-            cardView.changeCardPanel(val);
-
-            console.log(state.chosenCardValues);
+var removeCardEventListeners = () => {
+    state.cards.cardRange.forEach( val => {
+        var el = document.getElementById(`card__${val}`);
+        if(el){
+            el.removeEventListener('click', event => {
+                console.log(`card event ${val} listeners removed`);
+            });
         }
-        else if (state.chosenCardPositions.length === state.chooseNumCards){
-        
-            console.log('finish choosing');
-            controlResult();
-        }
+
+
     })
-});
+}
+
+var listenCardEvents = () => {
+    // Checks each card if it is clicked
+    state.cards.cardRange.forEach( val => {
+        document.getElementById(`card__${val}`).addEventListener('click', event => {
+
+            // only allow card choosing if does not exceed choosecards
+            if( state.chosenCardPositions.length < state.chooseNumCards ){
+
+                // add the val to cards chosen
+                // this seems redundant
+                state.chosenCardPositions.push(val);
+
+                // assign card values based on cardPosition
+                var cardValue = state.cards.cardValues[val];
+                state.chosenCardValues.push(cardValue);
+
+                // change view of that card
+                cardView.changeCardPanel(val);
+            }
+            
+            if (state.chosenCardPositions.length === state.chooseNumCards && state.stage !== 2){
+                
+                // going to result state
+                state.stage = 2
+                
+                // get the results of the cards
+                controlResult();
+
+                // remove the choices from the cards and event listeners
+                cardView.removeAllCards();
+                removeCardEventListeners();
+                state.cardShown = false;
+            }
+        })   
+    });
+}
+
+
 
 
 
 /**********************Result Controller**************/
+// We need to consider 2 result controller,
+// single reading and triple reading
+
 
 const controlResult = async () => {
 

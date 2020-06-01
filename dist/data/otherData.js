@@ -1,4 +1,4 @@
-{
+export var otherData = {
     "cards": [
         {
             "name":"The Fool ",

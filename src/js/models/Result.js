@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { otherData } from '../../../dist/data/otherData';
 export default class Result {
 
     constructor( chosenCardValues){
@@ -11,7 +12,6 @@ export default class Result {
     async getResults(){
 
 
-        console.log('here');
         console.log(this.chosenCardValues);
         this.chosenCardValues.forEach((value) =>  {
             this.getResult(value);
@@ -20,16 +20,23 @@ export default class Result {
         return this.cardsData;
     }
 
+    // get individual results
     async getResult(value){
-
+        var cardData;
         const proxy = 'https://cors-anywhere.herokuapp.com/';
         const num = this.correctNum(value);
 
+        console.log(`num is ${num}`);
         try{
-            const cardData = await axios.get(`${proxy}https://rws-cards-api.herokuapp.com/api/v1/cards/ar${num}`);
+            const jsonRes = await axios.get(`${proxy}https://rws-cards-api.herokuapp.com/api/v1/cards/ar${num}`);
+
+            // we need to parse this data to only grab the necessary data
+            cardData = this.parseData(jsonRes);
+            console.log(cardData);
+            // pushing the data into our array
 
             this.cardsData.push(cardData);
-            console.log(cardData);
+
         }catch(error){
             console.log(`error in fetching data`);
             console.log(error);
@@ -40,14 +47,29 @@ export default class Result {
     correctNum(value){
         var num;
 
-        console.log(`value is ${value}`);
-        if( value.legnth === 1 ){
+        if( value.toString().length === 1 ){
             num = `0${value}`;
         } else{
             num = value;
         }
 
         return num;
+    }
+
+    parseData(jsonData){
+        var cardData = {};
+
+        cardData.name = jsonData.data.card.name;
+        cardData.nameShort = jsonData.data.card.name_short;
+        cardData.type = jsonData.data.card.type;   // type is major
+        cardData.value = jsonData.data.card.value;      // 0-21
+        cardData.meaningUp = jsonData.data.card.meaning_up;     
+        cardData.meaningRev = jsonData.data.card.meaning_rev;
+
+        // grabbing data from our personal json data
+        cardData.summary = otherData.cards[cardData.value].summary;
+
+        return cardData;
     }
 
 }
