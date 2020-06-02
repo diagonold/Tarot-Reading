@@ -15,12 +15,7 @@
     height: 150px;
 }
 
-.bottomPanel{
-    text-align:center;
-    background-color: #f1e3dd ;
-    height: 300px;
 
-}
 
 .landingPanel{
     color:#667292;
@@ -52,16 +47,31 @@
     border:  4px solid #667292;
     border-radius: 5px;
     height: 400px;
+    padding: 20px;
 }
 
 .resultTextPanel{
     border: 5px solid #c5aea4;
-    height:300px;
+    background-color:  #fbefcc;
+    box-sizing: border-box;
+
 }
 .resultText{
     padding: 10px;
     text-align: center;
     color :#667292;
 }
+
+.resultTopPanel{
+    text-align: center;
+}
+
+.resultBottomPanel{
+    text-align:center;
+    background-color: #f1e3dd ;
+    height: 300px;
+
+}
+
 
 

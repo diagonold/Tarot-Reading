@@ -9,6 +9,8 @@ export const renderStage = (stage) => {
         title = "Choose 1 card";
     }else if ( stage === 1){
         title = "Choose your Past, Present and Future card";
+    }else if (stage === 2){
+        title = "Your Reading";
     }
 
     elements.titlePage.innerHTML = title;

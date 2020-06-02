@@ -4,6 +4,7 @@ export const elements = {
     singleSpread: document.querySelector(".single__reading"),
     tripleSpread: document.querySelector(".triple__reading"),
     cardPanel:document.getElementById("card__panel"),
-    mainPanel:document.getElementById("main__panel")
+    mainPanel:document.getElementById("main__panel"),
+    resultpanel:document.getElementById("result__panel")
 }
 

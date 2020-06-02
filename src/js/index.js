@@ -1,9 +1,10 @@
 import axios from "axios";
 import {elements} from "./views/base";
-import * as Mode from "./views/modeView";
+import * as modeView from "./views/modeView";
 import Card from "./models/Card";
 import * as cardView from "./views/cardView";
 import Result from "./models/Result";
+import * as resultView from "./views/resultView";
 // This will store the state of the user in the app
 var state = {
     // stage 0 is single spread
@@ -49,11 +50,11 @@ elements.singleSpread.addEventListener("click", event =>{
     state.chooseNumCards = 1;
 
     // show the UI of the pressed state
-    Mode.changeView(state.stage);
+    modeView.changeView(state.stage);
 
 
     // change the title
-    Mode.renderStage(state.stage);
+    modeView.renderStage(state.stage);
 });
 
 elements.tripleSpread.addEventListener("click", event =>{
@@ -69,10 +70,10 @@ elements.tripleSpread.addEventListener("click", event =>{
     state.chooseNumCards = 3;
 
     // show the UI of the pressed state
-    Mode.changeView(state.stage);
+    modeView.changeView(state.stage);
 
     // change the title 
-    Mode.renderStage(state.stage);
+    modeView.renderStage(state.stage);
 
     // choosing card stage
 
@@ -147,16 +148,21 @@ var listenCardEvents = () => {
             
             if (state.chosenCardPositions.length === state.chooseNumCards && state.stage !== 2){
                 
-                // going to result state
-                state.stage = 2
-                
-                // get the results of the cards
-                controlResult();
-
                 // remove the choices from the cards and event listeners
                 cardView.removeAllCards();
                 removeCardEventListeners();
                 state.cardShown = false;
+
+                // going to result state
+                state.stage = 2
+                modeView.renderStage(state.stage);
+                
+                // get the results of the cards
+                controlResult(state.chooseNumCards);
+
+                // show the results of the cards
+                // here we pass the chooseNumCards to the view
+
             }
         })   
     });
@@ -171,13 +177,27 @@ var listenCardEvents = () => {
 // single reading and triple reading
 
 
-const controlResult = async () => {
+const controlResult = async (numCards) => {
 
     state.result = new Result(state.chosenCardValues);
-    state.cardsData = await state.result.getResults();
 
-    console.log(state.cardsData);
+    try{
+        state.cardsData = await state.result.getResults();
 
+        console.log(state.cardsData);
+    
+        if(state.cardsData){
+            if(numCards === 1){
+                // takes in the available data and show it to user
+                await resultView.showSingleReading(state.cardsData);
+            }else if( numCards === 3){
+                await resultView.showThreeReading(state.cardsData);
+            }
+        }
+    } catch(error){
+        console.log('Result display error');
+    }
+   
 }
 
 
