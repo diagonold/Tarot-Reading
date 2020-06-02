@@ -78,8 +78,10 @@ Learning bootstrap. then build on top of it. Bootstrap very useful for getting g
 
 
 ## Bugs
-1. after every change of reading, the card does not close
-2. after choosing the designated amount of card, it has to wait for another card to be chosen before it gets the results
+
+## Possible improvements
+1. increasing the number of shuffle
+2. create more accurate description
 
     
 

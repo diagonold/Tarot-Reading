@@ -2,22 +2,19 @@ import axios from 'axios';
 import { otherData } from '../../../dist/data/otherData';
 export default class Result {
 
-    constructor( chosenCardValues){
+    constructor( chosenCardValues ){
         // array of chosen card values
         this.chosenCardValues = chosenCardValues;
         this.cardsData = [];
+    
     }
 
     // takes all the results and store it into cardAnswers
     async getResults(){
-
-
-        console.log(this.chosenCardValues);
-        this.chosenCardValues.forEach((value) =>  {
-            this.getResult(value);
-        });
-
-        return this.cardsData;
+        for(var i = 0; i<this.chosenCardValues.length; i++){
+            var data = await this.getResult(this.chosenCardValues[i]);
+            this.cardsData.push(data);
+        }
     }
 
     // get individual results
@@ -26,27 +23,33 @@ export default class Result {
         const proxy = 'https://cors-anywhere.herokuapp.com/';
         const num = this.correctNum(value);
 
-        console.log(`num is ${num}`);
         try{
             const jsonRes = await axios.get(`${proxy}https://rws-cards-api.herokuapp.com/api/v1/cards/ar${num}`);
 
             // we need to parse this data to only grab the necessary data
             cardData = this.parseData(jsonRes);
-            console.log(cardData);
             // pushing the data into our array
+            //console.log(cardData);
 
-            this.cardsData.push(cardData);
+            // this.cardsData.push(cardData);
 
+            return cardData;
+            // this.cardsData.push(cardData);
+            //console.log(this.cardsData);
+
+            
         }catch(error){
             console.log(`error in fetching data`);
             console.log(error);
+
         }
+
     }
 
     // if a single digit, need to add a 0 in front
     correctNum(value){
         var num;
-
+        console.log(value);
         if( value.toString().length === 1 ){
             num = `0${value}`;
         } else{

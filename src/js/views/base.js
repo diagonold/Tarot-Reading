@@ -5,6 +5,6 @@ export const elements = {
     tripleSpread: document.querySelector(".triple__reading"),
     cardPanel:document.getElementById("card__panel"),
     mainPanel:document.getElementById("main__panel"),
-    resultpanel:document.getElementById("result__panel")
+    resultPanel:document.getElementById("result__panel"),
 }
 

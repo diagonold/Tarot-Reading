@@ -100,13 +100,16 @@ const init = () => {
     // we need a shuffle every time we choose a new reading mode
     state.cards.shuffle();
 
+    // clear the previous reading results
+    resultView.clearReading();
+
     
 }
 
 
 /*************** Card controller*********/
 
-var createCardEventListeners = (cardShown) => {
+var createCardEventListeners = async (cardShown) => {
     if(cardShown){
         // create event listeners
         listenCardEvents();
@@ -126,7 +129,7 @@ var removeCardEventListeners = () => {
     })
 }
 
-var listenCardEvents = () => {
+var listenCardEvents = async() => {
     // Checks each card if it is clicked
     state.cards.cardRange.forEach( val => {
         document.getElementById(`card__${val}`).addEventListener('click', event => {
@@ -182,21 +185,34 @@ const controlResult = async (numCards) => {
     state.result = new Result(state.chosenCardValues);
 
     try{
-        state.cardsData = await state.result.getResults();
+        await state.result.getResults();
 
-        console.log(state.cardsData);
-    
-        if(state.cardsData){
-            if(numCards === 1){
-                // takes in the available data and show it to user
-                await resultView.showSingleReading(state.cardsData);
-            }else if( numCards === 3){
-                await resultView.showThreeReading(state.cardsData);
-            }
+        if(state.chooseNumCards ===1 ){
+            console.log(state.result.cardsData[0]);
+            resultView.showSingleReading(state.result.cardsData[0]);  
         }
+        
+        if(state.chooseNumCards === 3){
+            console.log(state.result.cardsData);
+            resultView.showThreeReading(...state.result.cardsData);  
+
+        }
+
+
     } catch(error){
         console.log('Result display error');
     }
+
+
+    // if(numCards === 1){
+    //     console.log(`rererere ${state.cardsData} nothing
+    //     `);
+
+    //     // takes in the available data and show it to user
+    //     resultView.showSingleReading(state.cardsData);
+    // }else if( numCards === 3){
+    //     resultView.showThreeReading(state.cardsData);
+    // }
    
 }
 
