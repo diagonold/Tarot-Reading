@@ -85,6 +85,10 @@ const init = () => {
     state.chosenCardPositions = [];
     state.chosenCardValues =  [];
 
+
+    // clear the previous reading results
+    resultView.clearReading();
+    
     // render cards and listeners
     if(!state.cardShown){
         cardView.showCards();
@@ -100,8 +104,6 @@ const init = () => {
     // we need a shuffle every time we choose a new reading mode
     state.cards.shuffle();
 
-    // clear the previous reading results
-    resultView.clearReading();
 
     
 }

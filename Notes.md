@@ -82,6 +82,9 @@ Learning bootstrap. then build on top of it. Bootstrap very useful for getting g
 ## Possible improvements
 1. increasing the number of shuffle
 2. create more accurate description
+3. more on what tarot means 
+4. More info on the different type of reading
+5. getting the user to voice out his life question or concern
 
     
 
